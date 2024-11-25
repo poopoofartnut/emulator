@@ -6,7 +6,9 @@
     <title>skibidi</title>
 </head>
 <body>
-    skib
+  <div id="terminal-line" style="animation: textShadow 0.15s infinite;">
+    <h1 id="dir" >root@PC:/ # </h1>
+</div>
     <div id="crt" class="crt"></div>
 </body>
 </html>
@@ -14,12 +16,28 @@
   @font-face {
     font-family: clacon;
     src: url('clacon2.woff2');
+    
+  }
+  #input{
+    background-color: #ffffff00;
+    border: none;
+    animation: textShadow 0.15s infinite;
   }
     body{
         background-color: rgb(43, 43, 43);
-        color: rgb(255, 255, 255);
+        color: rgb(0, 255, 0);
         font-family: clacon;
+        animation: textShadow 0.15s infinite;
+        margin: 1in;
+        overflow: none;
+        
     }
+    #terminal-line {
+            display: flex;
+            align-items: center;
+            white-space: nowrap;
+        }
+
     @keyframes flicker {
   0% {
     opacity: 0.27861;
