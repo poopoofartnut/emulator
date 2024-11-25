@@ -6,11 +6,51 @@
     <title>skibidi</title>
 </head>
 <body>
-  <div id="terminal-line" style="animation: textShadow 0.15s infinite;">
-    <h1 id="dir" >root@PC:/ # </h1>
+  <div id="terminal">
+    <div id="output"></div>
+    <div id="input-line">
+        <span id="prompt">$</span>
+        <input  autocomplete="off" type="text" id="user-input" autofocus>
+    </div>
 </div>
+
     <div id="crt" class="crt"></div>
 </body>
+<script>
+  const terminal = document.getElementById('terminal');
+        const output = document.getElementById('output');
+        const userInput = document.getElementById('user-input');
+
+        userInput.addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                const command = userInput.value.trim();
+                
+                // Display the entered command
+                const commandLine = document.createElement('div');
+                commandLine.className = 'output-line';
+                commandLine.textContent = `$ ${command}`;
+                output.appendChild(commandLine);
+
+                // Display "command not found" error
+                const errorLine = document.createElement('div');
+                errorLine.className = 'output-line';
+                errorLine.textContent = `Command not found: ${command}`;
+                output.appendChild(errorLine);
+
+                // Clear the input field
+                userInput.value = '';
+
+                // Scroll to the bottom of the terminal
+                terminal.scrollTop = terminal.scrollHeight;
+            }
+        });
+
+        // Focus on the input field when the terminal is clicked
+        terminal.addEventListener('click', function() {
+            userInput.focus();
+        });
+</script>
 </html>
 <style>
   @font-face {
@@ -18,13 +58,28 @@
     src: url('clacon2.woff2');
     
   }
-  #input{
-    background-color: #ffffff00;
-    border: none;
-    animation: textShadow 0.15s infinite;
-  }
+  #prompt {
+            margin-right: 5px;
+            font-family: clacon;
+        }
+        #user-input {
+            background-color: transparent;
+            border: none;
+            color: #0f0;
+            font-family: monospace;
+            font-size: 16px;
+            outline: none;
+            width: 100%;
+            font-family: clacon;
+            animation: textShadow 0.15s infinite;
+        }
+        #input-line {
+            display: flex;
+            align-items: center;
+            font-family: clacon;
+        }
     body{
-        background-color: rgb(43, 43, 43);
+        background-color: rgb(13, 28, 2);
         color: rgb(0, 255, 0);
         font-family: clacon;
         animation: textShadow 0.15s infinite;
@@ -198,4 +253,5 @@
 .crt {
   animation: textShadow 1.6s infinite;
 }
+
 </style>
